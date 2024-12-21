@@ -1,0 +1,12 @@
+# Configuración básica para Jekyll
+title: Mi Blockchain API
+description: Página para interactuar con la Blockchain API.
+baseurl: "" # Deja vacío si es el repositorio principal
+url: "https://<TU-USUARIO>.github.io/<NOMBRE-DEL-REPO>" # Reemplaza con tu URL
+theme: minima # Tema por defecto
+plugins:
+  - jekyll-sass-converter
+
+# Configuración de SCSS
+sass:
+  sass_dir: assets/css
