@@ -4,24 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blockchain API</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        button {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-        pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-            border: 1px solid #ccc;
-            overflow-x: auto;
-            max-height: 300px;
-        }
-    </style>
+    <!-- Vincular el archivo CSS generado desde style.scss -->
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <h1>Bienvenido a la Blockchain</h1>
@@ -41,6 +25,7 @@
         // Cambia esta URL a la de tu servidor en Render
         const apiUrl = "https://tumicoin.onrender.com";
 
+        // Función para obtener la cadena de bloques
         async function getChain() {
             try {
                 const response = await fetch(`${apiUrl}/chain`);
@@ -52,6 +37,7 @@
             }
         }
 
+        // Función para añadir una transacción
         async function addTransaction() {
             try {
                 const response = await fetch(`${apiUrl}/add_transaction`, {
@@ -73,6 +59,7 @@
             }
         }
 
+        // Función para minar un bloque
         async function mineBlock() {
             try {
                 const response = await fetch(`${apiUrl}/mine`, {
@@ -92,6 +79,7 @@
             }
         }
 
+        // Función para registrar un usuario
         async function registerUser() {
             try {
                 const username = prompt("Ingrese un nombre de usuario:");
@@ -112,6 +100,7 @@
             }
         }
 
+        // Función para listar usuarios
         async function getUsers() {
             try {
                 const response = await fetch(`${apiUrl}/users`);
@@ -123,6 +112,7 @@
             }
         }
 
+        // Función para consultar transacciones
         async function getTransactions() {
             try {
                 const response = await fetch(`${apiUrl}/transactions`);
@@ -136,4 +126,3 @@
     </script>
 </body>
 </html>
-
