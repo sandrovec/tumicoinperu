@@ -30,15 +30,17 @@
     <button onclick="getChain()">Ver Cadena</button>
     <button onclick="addTransaction()">Añadir Transacción</button>
     <button onclick="mineBlock()">Minar Bloque</button>
+    <button onclick="registerUser()">Registrar Usuario</button>
+    <button onclick="getUsers()">Listar Usuarios</button>
+    <button onclick="getTransactions()">Consultar Transacciones</button>
 
     <h3>Resultado:</h3>
     <pre id="output">Aquí aparecerán los resultados...</pre>
 
     <script>
         // Cambia esta URL a la de tu servidor en Render
-        const apiUrl = "https://tumicoin.onrender.com/";
+        const apiUrl = "https://tumicoin.onrender.com";
 
-        // Función para obtener la cadena de bloques
         async function getChain() {
             try {
                 const response = await fetch(`${apiUrl}/chain`);
@@ -50,7 +52,6 @@
             }
         }
 
-        // Función para añadir una transacción
         async function addTransaction() {
             try {
                 const response = await fetch(`${apiUrl}/add_transaction`, {
@@ -72,7 +73,6 @@
             }
         }
 
-        // Función para minar un bloque
         async function mineBlock() {
             try {
                 const response = await fetch(`${apiUrl}/mine`, {
@@ -91,6 +91,49 @@
                 console.error(error);
             }
         }
+
+        async function registerUser() {
+            try {
+                const username = prompt("Ingrese un nombre de usuario:");
+                if (!username) return;
+
+                const response = await fetch(`${apiUrl}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username })
+                });
+                const data = await response.json();
+                document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('output').innerText = "Error al registrar el usuario.";
+                console.error(error);
+            }
+        }
+
+        async function getUsers() {
+            try {
+                const response = await fetch(`${apiUrl}/users`);
+                const data = await response.json();
+                document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('output').innerText = "Error al obtener la lista de usuarios.";
+                console.error(error);
+            }
+        }
+
+        async function getTransactions() {
+            try {
+                const response = await fetch(`${apiUrl}/transactions`);
+                const data = await response.json();
+                document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('output').innerText = "Error al consultar las transacciones.";
+                console.error(error);
+            }
+        }
     </script>
 </body>
 </html>
+
