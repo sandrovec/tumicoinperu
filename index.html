@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ccc;
+            overflow-x: auto;
+            max-height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenido a la Blockchain</h1>
+    <p>Usa los botones a continuación para interactuar con la blockchain:</p>
+
+    <button onclick="getChain()">Ver Cadena</button>
+    <button onclick="addTransaction()">Añadir Transacción</button>
+    <button onclick="mineBlock()">Minar Bloque</button>
+
+    <h3>Resultado:</h3>
+    <pre id="output">Aquí aparecerán los resultados...</pre>
+
+    <script>
+        // Cambia esta URL a la de tu servidor en Render
+        const apiUrl = "https://tumicoin.onrender.com/";
+
+        // Función para obtener la cadena de bloques
+        async function getChain() {
+            try {
+                const response = await fetch(`${apiUrl}/chain`);
+                const data = await response.json();
+                document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('output').innerText = "Error al obtener la cadena de bloques.";
+                console.error(error);
+            }
+        }
+
+        // Función para añadir una transacción
+        async function addTransaction() {
+            try {
+                const response = await fetch(`${apiUrl}/add_transaction`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        sender: "Alice",
+                        recipient: "Bob",
+                        amount: 100
+                    })
+                });
+                const data = await response.json();
+                document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('output').innerText = "Error al añadir la transacción.";
+                console.error(error);
+            }
+        }
+
+        // Función para minar un bloque
+        async function mineBlock() {
+            try {
+                const response = await fetch(`${apiUrl}/mine`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        miner_address: "Minero1"
+                    })
+                });
+                const data = await response.json();
+                document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('output').innerText = "Error al minar el bloque.";
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>
